@@ -1,0 +1,44 @@
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pip-cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---------- 模型制品（体积大、可复现，不入库） ----------
+artifacts/
+*.pt
+*.pth
+*.onnx
+*.joblib
+*.pkl
+*.npz
+*.npy
+
+# ---------- 前端 ----------
+node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.browser-*/
+
+# ---------- 日志与临时文件 ----------
+*.log
+logs/
+tmp/
+.tmp/
+*.tmp
+
+# ---------- 编辑器 / 系统 ----------
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+.workbuddy/
+
+# ---------- 密钥 ----------
+.env
+.env.local

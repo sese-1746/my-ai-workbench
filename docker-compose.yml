@@ -1,0 +1,39 @@
+services:
+  api:
+    build: ./backend
+    environment:
+      HOUSE_MODEL_DIR: /app/artifacts/house
+      SENTIMENT_MODEL_DIR: /app/artifacts/sentiment
+      GENERATION_MODEL_DIR: /app/artifacts/generation
+      QA_MODEL_DIR: /app/artifacts/qa
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - house_models:/app/artifacts/house
+      - sentiment_models:/app/artifacts/sentiment
+      - generation_models:/app/artifacts/generation
+      - qa_models:/app/artifacts/qa
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=4)"
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  web:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  house_models:
+  sentiment_models:
+  generation_models:
+  qa_models:
